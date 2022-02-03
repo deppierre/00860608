@@ -7,7 +7,11 @@ WORKDIR ${datadir}
 
 COPY files/* ./
 
-RUN sed -i "s|dbPath_to_replace|${datadir}|" mongod.conf
+RUN apt-get update -y &&\
+    apt-get install less binutils -y
+
+RUN chmod +x mdb_catalog &&\
+    sed -i "s|dbPath_to_replace|${datadir}|" mongod.conf
 
 
 # Execute the init script and shutdown
