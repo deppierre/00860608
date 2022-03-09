@@ -1,2 +1,4 @@
 files/*.json
+files/*.bson
+files/*.archive
 mongod

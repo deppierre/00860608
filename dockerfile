@@ -17,8 +17,8 @@ RUN chmod +x mdb_catalog &&\
 # Execute the init script and shutdown
 RUN mkdir logs &&\
     mongod -f mongod.conf &&\
-    /usr/bin/mongoimport -d dbindex -c restaurants --port 27017 restaurants.json &&\
-    /usr/bin/mongoimport -d dbnoindex -c restaurants --port 27017 restaurants.json &&\
+    /usr/bin/mongorestore --nsTo='dbindex.sample' --nsFrom='sampledb.samplecollection' --nsInclude='sampledb.samplecollection' --noIndexRestore --archive=sampledata.archive mongodb://localhost:27017 &&\
+    /usr/bin/mongorestore --nsTo='dbnoindex.sample' --nsFrom='sampledb.samplecollection' --nsInclude='sampledb.samplecollection' --noIndexRestore --archive=sampledata.archive mongodb://localhost:27017 &&\
     mongo --quiet --port 27017 1_init.js
 
 #This is command issued when the container is created

@@ -8,9 +8,9 @@ Units:
 */
 
 dbNames = ["dbindex","dbnoindex"]
-collections = ["restaurants"]
+collections = ["sample"]
 
-print( "Namespace                                                           \tSize\tCached\tRead\tPgDisk\tPgCache")
+print( "Namespace                                                           \tSize\tCached\tRead\tPagesRead")
 
 for(d=0;d<dbNames.length;d++){
     for(c=0;c<collections.length;c++) {
@@ -21,14 +21,13 @@ for(d=0;d<dbNames.length;d++){
         inCache = Math.round(collStats["wiredTiger"]["cache"]["bytes currently in the cache"] /mb * 100) / 100
         cacheRead = Math.round(collStats["wiredTiger"]["cache"]["bytes read into cache"] /mb * 100) / 100
         pagesUsed = Math.round(collStats["wiredTiger"]["cache"]["pages read into cache"])
-        pagesCache = Math.round(collStats["wiredTiger"]["cache"]["pages requested from the cache"])
         collSize = collStats["size"] + collStats['totalIndexSize']
         namespace = dbNames[d] + "." + collections[c]
         lgth = namespace.length<=70?namespace.length:70
         namespace = namespace + Array(70 - lgth).join(" ")
 
         if(collSize > 0) {
-            print(  namespace + "\t" + collSize + "\t" +  inCache + "\t" + cacheRead + "\t" + pagesUsed + "\t" + pagesCache)
+            print(  namespace + "\t" + collSize + "\t" +  inCache + "\t" + cacheRead + "\t" + pagesUsed )
         }
 
         // print index stats
@@ -41,11 +40,10 @@ for(d=0;d<dbNames.length;d++){
             indexInCache = Math.round(indexStats["cache"]["bytes currently in the cache"] /mb * 100) / 100
             indexCacheRead = Math.round(indexStats["cache"]["bytes read into cache"] /mb * 100) / 100
             indexPagesUsed = Math.round(indexStats["cache"]["pages read into cache"])
-            indexPagesCache = Math.round(indexStats["cache"]["pages requested from the cache"])
             indexSize = collStats.indexSizes[nameIndex]
             nameTab =Array(10).join(" ") + nameIndex + Array(Math.max(0,60 - nameIndex.length)).join(" ")
             if(indexSize > 0) {
-                print( nameTab + "\t" + indexSize + "\t" +  indexInCache + "\t" + indexCacheRead + "\t"+ indexPagesUsed +"\t"+ indexPagesCache)
+                print( nameTab + "\t" + indexSize + "\t" +  indexInCache + "\t" + indexCacheRead + "\t"+ indexPagesUsed )
             }
         }
     }

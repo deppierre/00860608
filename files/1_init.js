@@ -1,18 +1,11 @@
 //Drop index if any
-db.getSiblingDB('dbindex').restaurants.dropIndexes();
+db.getSiblingDB('dbindex').sample.dropIndexes();
 
 //Create a new index on the dbindex.restaurants collection
-let index_restaurants = db.getSiblingDB('dbindex').restaurants.createIndex({
+let index = db.getSiblingDB('dbindex').sample.createIndex({
     "name":1,
     "address.city":1
 });
-printjson(index_restaurants);
-
-
-//Create a new index on the nodbindex.restaurants collection
-let noindex_restaurants = db.getSiblingDB('dbnoindex').restaurants.createIndex({
-    "name":1
-});
-printjson(noindex_restaurants);
+printjson(index);
 
 db.getSiblingDB('admin').shutdownServer();
