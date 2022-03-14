@@ -7,7 +7,7 @@ Units:
 - Used in pages
 */
 
-dbNames = ["dbindex","dbnoindex"]
+dbNames = ["dbsample"]
 collections = ["sample"]
 
 print( "Namespace                                                           \tSize\tCached\tRead\tPagesRead")
