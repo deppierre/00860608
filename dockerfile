@@ -18,8 +18,6 @@ RUN chmod +x mdb_catalog &&\
 RUN mkdir logs &&\
     mongod -f mongod.conf &&\
     /usr/bin/mongorestore --nsTo='dbsample.sample' --nsFrom='sampledb.samplecollection' --nsInclude='sampledb.samplecollection' --noIndexRestore --archive=sampledata.archive mongodb://localhost:27017 &&\
-    # /usr/bin/mongorestore --nsTo='dbnoindex.sample' --nsFrom='sampledb.samplecollection' --nsInclude='sampledb.samplecollection' --noIndexRestore --archive=sampledata.archive mongodb://localhost:27017 &&\
-    # /usr/bin/mongorestore --nsTo='dbpartialindex.sample' --nsFrom='sampledb.samplecollection' --nsInclude='sampledb.samplecollection' --noIndexRestore --archive=sampledata.archive mongodb://localhost:27017 &&\
     mongo --quiet --port 27017 1_init.js
 
 #This is command issued when the container is created
