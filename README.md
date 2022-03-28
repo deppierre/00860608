@@ -2,8 +2,6 @@
 ```
 ## mongo image
 docker build -t mongodb_00806068 .
-## Alternative image based on centos
-docker build -f centos_dockerfile -t mongodb_00806068_2 .
 ```
 
 ## Read catalog
